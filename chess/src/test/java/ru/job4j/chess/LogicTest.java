@@ -20,15 +20,18 @@ public class LogicTest {
         });
         assertThat(exception.getMessage()).isEqualTo("Figure not found on the board.");
     }
+
     @Test()
-    public void whenImpossibleMove() throws FigureNotFoundException, OccupiedCellException, ImpossibleMoveException {
+    public void whenImpossibleMove()
+            throws FigureNotFoundException, OccupiedCellException, ImpossibleMoveException {
         Logic logic = new Logic();
         logic.add(new BishopBlack(Cell.C1));
         logic.move(Cell.C1, Cell.C7);
     }
 
     @Test()
-    public void whenOccupiedCell() throws FigureNotFoundException, OccupiedCellException, ImpossibleMoveException {
+    public void whenOccupiedCell()
+            throws FigureNotFoundException, OccupiedCellException, ImpossibleMoveException {
         Logic logic = new Logic();
         logic.add(new BishopBlack(Cell.C1));
         logic.add(new BishopBlack(Cell.H6));

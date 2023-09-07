@@ -30,7 +30,6 @@ public final class Logic {
         return true;
     }
 
-
     public void clean() {
         Arrays.fill(figures, null);
         index = 0;
