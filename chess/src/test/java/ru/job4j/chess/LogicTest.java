@@ -7,6 +7,7 @@ import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.black.BishopBlack;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LogicTest {
@@ -26,7 +27,10 @@ public class LogicTest {
             throws FigureNotFoundException, OccupiedCellException, ImpossibleMoveException {
         Logic logic = new Logic();
         logic.add(new BishopBlack(Cell.C1));
-        logic.move(Cell.C1, Cell.C7);
+        ImpossibleMoveException exception = assertThrows(ImpossibleMoveException.class, () -> {
+            logic.move(Cell.C1, Cell.C7);
+        });
+        assertThat(exception.getMessage()).isEqualTo("Could not move by diagonal from C1 to C7");
     }
 
     @Test()
@@ -35,6 +39,9 @@ public class LogicTest {
         Logic logic = new Logic();
         logic.add(new BishopBlack(Cell.C1));
         logic.add(new BishopBlack(Cell.H6));
-        logic.move(Cell.C1, Cell.H6);
+        OccupiedCellException exception = assertThrows(OccupiedCellException.class, () -> {
+            logic.move(Cell.C1, Cell.H6);
+        });
+        assertThat(exception.getMessage()).isEqualTo("Could not move to occupied cell");
     }
 }
